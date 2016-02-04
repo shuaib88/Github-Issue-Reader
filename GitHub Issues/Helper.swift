@@ -43,28 +43,6 @@ class Helper {
     /// - Parameter completion: A closure to run on the converted JSON
     /// - Attributions: Assignment write-up
     
-    func doStuffWithBlock(completion:() -> Void) {
-        print("HI")
-        
-        completion()
-    
-    }
-    
-    func soething() {
-        print("HI")
-        
-        doStuffWithBlock { () -> Void in
-        
-            
-            print("this is our completion Block")
-        
-        
-        
-        
-        }
-        
-        
-    }
     
     static func issuesRequestion(urlString: String, completion:([[String: AnyObject]]?) -> Void) {
         
