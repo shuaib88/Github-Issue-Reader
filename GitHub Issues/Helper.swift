@@ -32,6 +32,21 @@ class Helper {
         return formattedDateString
     }
     
+    static func returnCurrentDate() -> String {
+        // current date object
+        let currentDateObject = NSDate()
+        
+        // create formatter for desired format
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .LongStyle
+        formatter.timeStyle = .ShortStyle
+        
+        // create string with current date
+        let currentDateString = formatter.stringFromDate(currentDateObject)
+        
+        return currentDateString
+    }
+    
     
     // MARK: - Data Retrieval and Processing
     
@@ -54,6 +69,9 @@ class Helper {
         
         // Create a `NSURLSession` object
         let session = NSURLSession.sharedSession()
+        
+        // test statement
+        print("hello")
         
         // Create a task for the session object to complete
         let task = session.dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in

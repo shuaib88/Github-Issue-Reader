@@ -19,9 +19,11 @@ class DataTableViewController: UITableViewController {
     var gitHubQuery: String = ""
     
     /// updates cell Identifier
-    
     var cellIdentifier = ""
-
+    
+    /// table Footer Variable
+    /// - Attributions: http://www.adventuresofanentrepreneur.net/creating-a-mobile-appsgames-company/headers-and-footers-in-ios-tableview for how to implement footer
+    var tableDataFooterDate = "Footer - Section 0"
     
     // MARK: Lifecycle
     
@@ -29,12 +31,19 @@ class DataTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ///tableFooter implementation
+//        let tableViewFooter = UIView(frame: CGRect(x: 0, y: 0, width: 600, height: 50))
+//        tableViewFooter.backgroundColor = UIColor.greenColor()
+//        tableView.tableFooterView  = tableViewFooter
     }
     
     override func viewWillAppear(animated: Bool) {
 
         // Make a request for data from GitHub based on the gitHubQuery
         Helper.issuesRequestion(self.gitHubQuery) { (response) -> Void in
+            
+            self.tableDataFooterDate = Helper.returnCurrentDate()
             
             // Test that the `response` is not `nil` and unwrap it to the variable
             // response.  IF it is `nil` then return the function so that we do not reload the table unnecessarily.
@@ -56,6 +65,7 @@ class DataTableViewController: UITableViewController {
         
         // adding target (self) and action to refreshControl object of tableViewController
         self.refreshControl?.addTarget(self, action: "refreshTable:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl!)
     }
     
     //
@@ -69,9 +79,11 @@ class DataTableViewController: UITableViewController {
     /// - Attributions: Lecture slides and assignment write-up, as well as https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/#example-scenario
     func refreshTable(refreshControl: UIRefreshControl) {
         
+        print(gitHubQuery)
         // update the table view's source data
-        Helper.issuesRequestion("https://api.github.com/repos/uchicago-mobi/2016-Winter-Forum/issues?state=" + gitHubQuery) { (response) -> Void in
+        Helper.issuesRequestion(gitHubQuery) { (response) -> Void in
             
+            self.tableDataFooterDate = Helper.returnCurrentDate()
             // Test that the `response` is not `nil` and unwrap it to the variable
             // response.  IF it is `nil` then return the function so that we do not
             // reload the table unnecessarily.
@@ -81,8 +93,12 @@ class DataTableViewController: UITableViewController {
             
             // Set the response data to the view controller's `issues` property
             self.issues = response
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.tableView.reloadData()
+            }
         }
-        
+    
         //refresh the view
         self.tableView.reloadData()
         refreshControl.endRefreshing()
@@ -123,6 +139,13 @@ class DataTableViewController: UITableViewController {
         cell.dateLabel.text = Helper.dateFormatter(dateString!)
         
         return cell
+    }
+    
+    // footer addition
+    /// - Attributions: http://www.adventuresofanentrepreneur.net/creating-a-mobile-appsgames-company/headers-and-footers-in-ios-tableview for how to implement footer
+
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return tableDataFooterDate
     }
 
 }
