@@ -25,12 +25,6 @@ class IssueDetailViewController: UIViewController {
     //the issues object that comes from IssueTableViewController
     var issue: Issue?
     
-    @IBAction func openWithSafariVC(sender: AnyObject)
-    {
-
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

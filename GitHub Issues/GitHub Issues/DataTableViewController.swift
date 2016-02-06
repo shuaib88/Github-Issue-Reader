@@ -12,20 +12,32 @@ class DataTableViewController: UITableViewController {
     
     // MARK: Properties
     
+    var activityIndicatorOn = true
+    
+    let activityContainer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+
+    
+    // create activity indicator
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+
+    
     /// The array of dictionaries that will hold all of our issues
     var issues:[[String: AnyObject]]? {
         willSet {
             // Called before property is set
             // the new value is available as parameter `newValue`
+            
+            print("activity indicator start animating")
+            
         }
         didSet {
             // Reloads the view after issues is set
 //            self.tableView.reloadData()
-            print("reloaded by property listener")
             
             // gets the data right away
             dispatch_async(dispatch_get_main_queue()) {
                 self.tableView.reloadData()
+                print("activity indicator stopped animating")
             }
         }
     }
@@ -47,10 +59,21 @@ class DataTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ///tableFooter implementation
-//        let tableViewFooter = UIView(frame: CGRect(x: 0, y: 0, width: 600, height: 50))
-//        tableViewFooter.backgroundColor = UIColor.greenColor()
-//        tableView.tableFooterView  = tableViewFooter
+        ///indicator implementation 
+        // create container
+        let activityContainer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        activityContainer.backgroundColor = UIColor.grayColor()
+        activityContainer.center = tableView.center
+        activityContainer.layer.cornerRadius = 5
+        
+        // create activity indicator
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        
+        // add to views to the view object
+        activityContainer.addSubview(activityIndicator)
+        tableView.addSubview(activityContainer)
+        
+        activityIndicator.startAnimating()
     }
     
     override func viewWillAppear(animated: Bool) {
