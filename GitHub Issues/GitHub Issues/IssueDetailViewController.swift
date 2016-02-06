@@ -6,6 +6,8 @@
 //  Copyright © 2016 Shuaib Labs. All rights reserved.
 //
 
+import SafariServices
+
 import UIKit
 
 class IssueDetailViewController: UIViewController {
@@ -22,6 +24,11 @@ class IssueDetailViewController: UIViewController {
     
     //the issues object that comes from IssueTableViewController
     var issue: Issue?
+    
+    @IBAction func openWithSafariVC(sender: AnyObject)
+    {
+
+    }
     
     
     override func viewDidLoad() {
@@ -51,10 +58,16 @@ class IssueDetailViewController: UIViewController {
     
     // MARK: Action
     
+    /// - Attributions: http://code.tutsplus.com/tutorials/ios-9-getting-started-with-sfsafariviewcontroller--cms-24260
     @IBAction func seeIssueOnWeb(sender: UIBarButtonItem) {
-        if let url = NSURL(string: issue!.url) {
-            UIApplication.sharedApplication().openURL(url)
-        }
+        // uncomment to see in safari
+//        if let url = NSURL(string: issue!.url) {
+//            UIApplication.sharedApplication().openURL(url)
+//        }
+        
+        // allows view to open up in web view
+        let svc = SFSafariViewController(URL: NSURL(string: self.url!)!)
+        self.presentViewController(svc, animated: true, completion: nil)
     }
     
 

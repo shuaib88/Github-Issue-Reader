@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //unselected icon color -- see TabController class
         
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
         return true
     }
 
