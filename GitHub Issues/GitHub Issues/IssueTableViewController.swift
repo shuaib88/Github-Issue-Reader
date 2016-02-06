@@ -43,8 +43,6 @@ class IssueTableViewController: DataTableViewController {
     }
     
 
-
-    
     // MARK: - Navigation
 
     /// prepares the next controller
@@ -68,8 +66,6 @@ class IssueTableViewController: DataTableViewController {
             let issueToBePassed = Issue(issueName: issueNameString!, posterID: posterIDString!, date: dateString, status: statusString!, body: bodyString!, url:issueUrlString!)
             
             issueDetailViewController.issue = issueToBePassed
-            print(issueToBePassed.dynamicType)
-
         }
     }
 }

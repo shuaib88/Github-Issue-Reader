@@ -32,7 +32,7 @@ class CircleViewController: UIViewController {
         super.viewDidLoad()
         
         // Make a request for all open data from GitHub
-        Helper.issuesRequestion("https://api.github.com/repos/uchicago-mobi/2016-Winter-Forum/issues?state=all") { (response) -> Void in
+        GitHubNetworkingManager.sharedInstance.issuesRequestion("https://api.github.com/repos/uchicago-mobi/2016-Winter-Forum/issues?state=all") { (response) -> Void in
             
             // Test that the `response` is not `nil` and unwrap it to the variable
             // response.  IF it is `nil` then return the function so that we do not

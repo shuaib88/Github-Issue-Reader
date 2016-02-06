@@ -15,7 +15,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        /// - Attributions: https://coderwall.com/p/dyqrfa/customize-navigation-bar-appearance-with-swift
+        // accesses the appearance protcol for Nav Bar and Tab Bar
+        let navigationBarAppearace = UINavigationBar.appearance()
+        let tabBarAppearance = UITabBar.appearance()
+        let tabBarItem = UITabBarItem.appearance()
+        
+        // setting the bar colors
+        navigationBarAppearace.tintColor = UIColor.orangeColor()
+        navigationBarAppearace.barTintColor = UIColor.grayColor()
+        
+        // setting the tab bar colors
+        tabBarAppearance.tintColor = UIColor.whiteColor()
+        tabBarAppearance.barTintColor = UIColor.grayColor()
+        
+        // change navigation item title color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        
+        /// - Attributions: http://stackoverflow.com/questions/26704896/swift-uitabbaritem-colors
+        //selected item text color
+        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: .Selected)
+
+        //unselected icon text color
+        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.blackColor()], forState: .Normal)
+        
+        //unselected icon color -- see TabController class
+        
         return true
     }
 

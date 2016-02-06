@@ -13,7 +13,22 @@ class DataTableViewController: UITableViewController {
     // MARK: Properties
     
     /// The array of dictionaries that will hold all of our issues
-    var issues:[[String: AnyObject]]?
+    var issues:[[String: AnyObject]]? {
+        willSet {
+            // Called before property is set
+            // the new value is available as parameter `newValue`
+        }
+        didSet {
+            // Reloads the view after issues is set
+//            self.tableView.reloadData()
+            print("reloaded by property listener")
+            
+            // gets the data right away
+            dispatch_async(dispatch_get_main_queue()) {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     /// updates the api url string - to be overrided in subclasses
     var gitHubQuery: String = ""
@@ -41,7 +56,7 @@ class DataTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
 
         // Make a request for data from GitHub based on the gitHubQuery
-        Helper.issuesRequestion(self.gitHubQuery) { (response) -> Void in
+        GitHubNetworkingManager.sharedInstance.issuesRequestion(self.gitHubQuery) { (response) -> Void in
             
             self.tableDataFooterDate = Helper.returnCurrentDate()
             
@@ -53,19 +68,10 @@ class DataTableViewController: UITableViewController {
             
             // Set the response data to the view controller's `issues` property
             self.issues = response
-            
-            // Call our method that will prompt the table to reload itself with the updated data
-            //            self.refreshTable()
-            
-            // gets the data right away
-            dispatch_async(dispatch_get_main_queue()) {
-                self.tableView.reloadData()
-            }
         }
         
         // adding target (self) and action to refreshControl object of tableViewController
         self.refreshControl?.addTarget(self, action: "refreshTable:", forControlEvents: UIControlEvents.ValueChanged)
-        self.tableView.addSubview(refreshControl!)
     }
     
     //
@@ -75,13 +81,13 @@ class DataTableViewController: UITableViewController {
     /// Reload the table with newly downloaded data. This should be called when
     /// the table is first shown onscreen and when the user conducts a pull-to-refresh operation.
 
-    /// - Note: You should be telling you table to reload here
+    /// - Note: You should be telling your table to reload here
     /// - Attributions: Lecture slides and assignment write-up, as well as https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/#example-scenario
     func refreshTable(refreshControl: UIRefreshControl) {
         
         print(gitHubQuery)
         // update the table view's source data
-        Helper.issuesRequestion(gitHubQuery) { (response) -> Void in
+        GitHubNetworkingManager.sharedInstance.issuesRequestion(gitHubQuery) { (response) -> Void in
             
             self.tableDataFooterDate = Helper.returnCurrentDate()
             // Test that the `response` is not `nil` and unwrap it to the variable

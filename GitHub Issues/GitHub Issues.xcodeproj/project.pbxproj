@@ -10,6 +10,8 @@
 		983FEB911C5D83AB00E0819A /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983FEB901C5D83AB00E0819A /* IssueDetailViewController.swift */; };
 		985666061C5EC4FC00DCC79B /* AllIssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985666051C5EC4FC00DCC79B /* AllIssueTableViewCell.swift */; };
 		9856660A1C5EC7E000DCC79B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985666091C5EC7E000DCC79B /* Helper.swift */; };
+		988CBCA81C65515500F93BC7 /* GitHubNetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988CBCA71C65515500F93BC7 /* GitHubNetworkingManager.swift */; };
+		988CBCAE1C65989B00F93BC7 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988CBCAD1C65989B00F93BC7 /* TabBarController.swift */; };
 		98B5F7481C63C17000FDB855 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5F7471C63C17000FDB855 /* DataTableViewController.swift */; };
 		98B6094E1C5F0941000ACAE3 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B6094D1C5F0941000ACAE3 /* CircleView.swift */; };
 		98B609541C5F0CE7000ACAE3 /* PushButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B609531C5F0CE7000ACAE3 /* PushButtonView.swift */; };
@@ -40,6 +42,8 @@
 		983FEB901C5D83AB00E0819A /* IssueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		985666051C5EC4FC00DCC79B /* AllIssueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllIssueTableViewCell.swift; sourceTree = "<group>"; };
 		985666091C5EC7E000DCC79B /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = ../Helper.swift; sourceTree = "<group>"; };
+		988CBCA71C65515500F93BC7 /* GitHubNetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubNetworkingManager.swift; sourceTree = "<group>"; };
+		988CBCAD1C65989B00F93BC7 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		98B5F7471C63C17000FDB855 /* DataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
 		98B6094D1C5F0941000ACAE3 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		98B609531C5F0CE7000ACAE3 /* PushButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushButtonView.swift; sourceTree = "<group>"; };
@@ -118,12 +122,14 @@
 				98B6094D1C5F0941000ACAE3 /* CircleView.swift */,
 				98DE32CB1C5C0ACD00C185E0 /* CircleViewController.swift */,
 				985666091C5EC7E000DCC79B /* Helper.swift */,
+				988CBCA71C65515500F93BC7 /* GitHubNetworkingManager.swift */,
 				98DE32AD1C5C009300C185E0 /* Info.plist */,
 				98DE32CF1C5C247D00C185E0 /* Issue.swift */,
 				983FEB901C5D83AB00E0819A /* IssueDetailViewController.swift */,
 				98DE32CD1C5C0F7D00C185E0 /* IssueTableViewCell.swift */,
 				98DE32AA1C5C009300C185E0 /* LaunchScreen.storyboard */,
 				98DE32A51C5C009300C185E0 /* Main.storyboard */,
+				988CBCAD1C65989B00F93BC7 /* TabBarController.swift */,
 			);
 			path = "GitHub Issues";
 			sourceTree = "<group>";
@@ -241,7 +247,9 @@
 				98DE32CA1C5C0A4500C185E0 /* IssueTableViewController.swift in Sources */,
 				98DE32CC1C5C0ACD00C185E0 /* CircleViewController.swift in Sources */,
 				98DE32A01C5C009300C185E0 /* AppDelegate.swift in Sources */,
+				988CBCAE1C65989B00F93BC7 /* TabBarController.swift in Sources */,
 				98B609541C5F0CE7000ACAE3 /* PushButtonView.swift in Sources */,
+				988CBCA81C65515500F93BC7 /* GitHubNetworkingManager.swift in Sources */,
 				985666061C5EC4FC00DCC79B /* AllIssueTableViewCell.swift in Sources */,
 				983FEB911C5D83AB00E0819A /* IssueDetailViewController.swift in Sources */,
 				9856660A1C5EC7E000DCC79B /* Helper.swift in Sources */,
