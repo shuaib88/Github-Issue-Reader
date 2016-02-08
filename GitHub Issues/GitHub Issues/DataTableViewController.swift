@@ -40,6 +40,10 @@ class DataTableViewController: UITableViewController {
             newActivityContainer.center.x = tableView.center.x
             newActivityContainer.center.y = tableView.center.y - navigationBarHeight! - statusBarHeight
             
+            // center the activity indicator
+            activityIndicator.center.x = newActivityContainer.frame.size.width/2
+            activityIndicator.center.y = newActivityContainer.frame.size.height/2
+            
             // add subviews
             newActivityContainer.addSubview(activityIndicator)
             
@@ -265,6 +269,7 @@ class DataTableViewController: UITableViewController {
             //set colors
             self.navigationController?.navigationBar.barTintColor = UIColor.grayColor()
             self.tabBarController?.tabBar.barTintColor = UIColor.grayColor()
+            self.activityContainer.backgroundColor = UIColor.grayColor()
             self.tableView.reloadData()
             
         } else {
@@ -273,6 +278,7 @@ class DataTableViewController: UITableViewController {
             //set colors
             self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
             self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
+            self.activityContainer.backgroundColor = UIColor.blackColor()
             self.tableView.reloadData()
         }
     }
