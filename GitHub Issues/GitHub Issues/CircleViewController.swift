@@ -34,6 +34,8 @@ class CircleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(defaults.boolForKey("nightModeOn"))
+        
         /// ensures correct colors are enforced
         func setCorrectColors() -> Void {
             // ensure consistent color for night mode
