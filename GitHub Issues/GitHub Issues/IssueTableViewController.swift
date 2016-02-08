@@ -15,6 +15,8 @@ class IssueTableViewController: DataTableViewController {
     /// executes after the initial view has loaded
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set correct API
         gitHubQuery =
             "https://api.github.com/repos/uchicago-mobi/2016-Winter-Forum/issues?state=" + "open"
     }
@@ -29,6 +31,15 @@ class IssueTableViewController: DataTableViewController {
         
         // dequeues reusable cell with the IssueTableViewCell we defined in the storyboard
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! IssueTableViewCell
+        
+        if defaults.boolForKey("nightModeOn") == true {
+            cell.backgroundColor = UIColor.blackColor()
+            cell.issueNameLabel.textColor = UIColor.whiteColor()
+        } else {
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.issueNameLabel.textColor = UIColor.blackColor()
+        }
+        
         
         // Fetches appropriate issue for the data source layout
         let issue = issues![indexPath.row]
@@ -68,4 +79,8 @@ class IssueTableViewController: DataTableViewController {
             issueDetailViewController.issue = issueToBePassed
         }
     }
+    
+    /// MARK: - Action
+
+    
 }

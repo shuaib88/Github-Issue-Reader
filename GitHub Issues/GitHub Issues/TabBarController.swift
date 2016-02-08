@@ -13,6 +13,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /// sets the unselected tab bar color as black
         for item in self.tabBar.items! as [UITabBarItem] {
             if let image = item.image {
                 item.image = image.imageWithRenderingMode(.AlwaysOriginal)
@@ -20,6 +21,10 @@ class TabBarController: UITabBarController {
             }
         }
     }
+    
+//    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
+//        print("colors set from tabBar")
+//    }
     
     
 

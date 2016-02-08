@@ -4,40 +4,69 @@
 //
 //  Created by Shuaib Ahmed on 2/4/16.
 //  Copyright © 2016 Shuaib Labs. All rights reserved.
-//
+/// - Attributions: for adding a tab delegate http://stackoverflow.com/questions/30849030/how-to-do-an-action-when-tab-bar-item-is-pressed-swift
 
 import UIKit
 
 class DataTableViewController: UITableViewController {
     
     // MARK: Properties
-    
-    var activityIndicatorOn = true
-    
-    let activityContainer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
+    
+    /// Defaults
+    /// - Attributions: https://www.hackingwithswift.com/read/12/2/reading-and-writing-basics-nsuserdefaults
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    /// UIButton for Navigation Controller
+    var toggleButton: UIButton = UIButton()
+    
+    /// UIView container that also stores my activity indicator
+    var activityContainer: UIView {
+        /// - Attributions: worked with Dana to define pattern of liveActivity Container and maintain state for closure. See lazy property
+        if let liveActivityContainer = _activityContainer {
+            return liveActivityContainer
+        } else {
+            //create and color a container for indicator
+            let newActivityContainer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+            newActivityContainer.backgroundColor = UIColor.grayColor()
+            newActivityContainer.layer.cornerRadius = 5
+            
+            /// - Attributions: Chaunxi gave me idea to correct for navBar height, I added status Bar
+            // get height of navBar and Status Bar
+            let navigationBarHeight = self.navigationController?.navigationBar.frame.size.height
+            let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+            
+            // center the new view correcting for top margin
+            newActivityContainer.center.x = tableView.center.x
+            newActivityContainer.center.y = tableView.center.y - navigationBarHeight! - statusBarHeight
+            
+            // add subviews
+            newActivityContainer.addSubview(activityIndicator)
+            
+            // makesure it returns the same object
+            _activityContainer = newActivityContainer
+            return _activityContainer!
+        }
+    }
+    
+    var _activityContainer: UIView?
     
     // create activity indicator
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
 
-    
     /// The array of dictionaries that will hold all of our issues
     var issues:[[String: AnyObject]]? {
         willSet {
-            // Called before property is set
-            // the new value is available as parameter `newValue`
-            
-            print("activity indicator start animating")
-            
         }
         didSet {
             // Reloads the view after issues is set
-//            self.tableView.reloadData()
-            
+
             // gets the data right away
             dispatch_async(dispatch_get_main_queue()) {
                 self.tableView.reloadData()
-                print("activity indicator stopped animating")
+                sleep(1)
+                self.activityIndicator.stopAnimating()
+                self.activityContainer.removeFromSuperview()
             }
         }
     }
@@ -50,7 +79,7 @@ class DataTableViewController: UITableViewController {
     
     /// table Footer Variable
     /// - Attributions: http://www.adventuresofanentrepreneur.net/creating-a-mobile-appsgames-company/headers-and-footers-in-ios-tableview for how to implement footer
-    var tableDataFooterDate = "Footer - Section 0"
+    var tableDataFooterDate = ""
     
     // MARK: Lifecycle
     
@@ -59,21 +88,25 @@ class DataTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ///indicator implementation 
-        // create container
-        let activityContainer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        activityContainer.backgroundColor = UIColor.grayColor()
-        activityContainer.center = tableView.center
-        activityContainer.layer.cornerRadius = 5
-        
-        // create activity indicator
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
-        
         // add to views to the view object
-        activityContainer.addSubview(activityIndicator)
         tableView.addSubview(activityContainer)
         
+        // start animating activity Indicator
         activityIndicator.startAnimating()
+        
+        // set the defaults
+        if let _ = defaults.objectForKey("firstLaunch"){
+            print("Not First Launch: ✌️")
+        } else {
+            defaults.setObject(NSDate(), forKey: "firstLaunch")
+            print("First Launch:🖕")
+        }
+        
+        // enforces initial nightmode settings
+        setCorrectColors()
+        
+        print("View Did Load Called")
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -86,6 +119,7 @@ class DataTableViewController: UITableViewController {
             // Test that the `response` is not `nil` and unwrap it to the variable
             // response.  IF it is `nil` then return the function so that we do not reload the table unnecessarily.
             guard let response = response else {
+                self.makeAlertForNetworkError()
                 return
             }
             
@@ -108,7 +142,6 @@ class DataTableViewController: UITableViewController {
     /// - Attributions: Lecture slides and assignment write-up, as well as https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/#example-scenario
     func refreshTable(refreshControl: UIRefreshControl) {
         
-        print(gitHubQuery)
         // update the table view's source data
         GitHubNetworkingManager.sharedInstance.issuesRequestion(gitHubQuery) { (response) -> Void in
             
@@ -117,6 +150,7 @@ class DataTableViewController: UITableViewController {
             // response.  IF it is `nil` then return the function so that we do not
             // reload the table unnecessarily.
             guard let response = response else {
+                self.makeAlertForNetworkError()
                 return
             }
             
@@ -171,10 +205,105 @@ class DataTableViewController: UITableViewController {
     }
     
     // footer addition
-    /// - Attributions: http://www.adventuresofanentrepreneur.net/creating-a-mobile-appsgames-company/headers-and-footers-in-ios-tableview for how to implement footer
+    /// - Attributions: http://www.adventuresofanentrepreneur.net/creating-a-mobile-appsgames-company/headers-and-footers-in-ios-tableview for how to implement footer also worked with nickpann (github id) to use viewFooterInSection instead of titleForFooterInSection
 
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return tableDataFooterDate
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerLabel = UILabel()
+        
+        // add date
+        footerLabel.text = tableDataFooterDate
+        
+        
+        // enforce coloring for footer
+        if defaults.boolForKey("nightModeOn") == false {
+            //set colors
+            footerLabel.backgroundColor = UIColor.grayColor()
+            footerLabel.textColor = UIColor.blackColor()
+            
+        } else {
+            defaults.setBool(true, forKey: "nightModeOn")
+            //set colors
+            footerLabel.backgroundColor = UIColor.blackColor()
+            footerLabel.textColor = UIColor.whiteColor()
+        }
+
+        //algin footer
+        footerLabel.textAlignment = NSTextAlignment.Center
+        
+        return footerLabel
     }
+    
+    /// Helper Functions
+    
+    /// toggles nightMode
+    func toggleNightMode() -> Void {
+        if defaults.boolForKey("nightModeOn") == true {
+            //flip the nightmode bool
+            defaults.setBool(false, forKey: "nightModeOn")
+            
+            //set colors
+            self.navigationController?.navigationBar.barTintColor = UIColor.grayColor()
+            self.tabBarController?.tabBar.barTintColor = UIColor.grayColor()
+            self.tableView.reloadData()
+            
+        } else {
+            //flip the nightmode bool
+            defaults.setBool(true, forKey: "nightModeOn")
+            
+            //set colors
+            self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+            self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
+            self.tableView.reloadData()
+        }
+    }
+    
+    /// ensures correct colors are enforced
+    func setCorrectColors() -> Void {
+        // ensure consistent color for night mode
+        if defaults.boolForKey("nightModeOn") == false {
+            
+            //set colors
+            self.navigationController?.navigationBar.barTintColor = UIColor.grayColor()
+            self.tabBarController?.tabBar.barTintColor = UIColor.grayColor()
+            self.tableView.reloadData()
+            
+        } else {
+            defaults.setBool(true, forKey: "nightModeOn")
+            
+            //set colors
+            self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+            self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
+            self.tableView.reloadData()
+        }
+    }
+    
+    /// creates an alertview for network errors
+    func makeAlertForNetworkError() -> Void {
+        let alertController = UIAlertController(title: "Network Error", message: "Get some Internets, Fool 👻👻👻", preferredStyle: .ActionSheet)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            return
+        }
+        alertController.addAction(OKAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            return
+        }
+    }
+    
+    /// MARK: Action
+    @IBAction func nightMode(sender: UIBarButtonItem) {
+        // toggle the night mode and colors
+        toggleNightMode()
+    }
+    
+    /// MARK: TabBarDelegate Method
+    
+//    func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
+//        setCorrectColors()
+//        print("colors set from tabBar")
+//    }
+    
+    
 
 }

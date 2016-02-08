@@ -26,6 +26,7 @@
 		98DE32CC1C5C0ACD00C185E0 /* CircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DE32CB1C5C0ACD00C185E0 /* CircleViewController.swift */; };
 		98DE32CE1C5C0F7D00C185E0 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DE32CD1C5C0F7D00C185E0 /* IssueTableViewCell.swift */; };
 		98DE32D01C5C247D00C185E0 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DE32CF1C5C247D00C185E0 /* Issue.swift */; };
+		98F8ECF91C66F13B002D9DE3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F8ECF81C66F13B002D9DE3 /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		98DE32CB1C5C0ACD00C185E0 /* CircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleViewController.swift; sourceTree = "<group>"; };
 		98DE32CD1C5C0F7D00C185E0 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		98DE32CF1C5C247D00C185E0 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		98F8ECF81C66F13B002D9DE3 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,11 +118,13 @@
 				98DE32C71C5C0A0C00C185E0 /* AllIssueTableViewController.swift */,
 				98DE32C91C5C0A4500C185E0 /* IssueTableViewController.swift */,
 				98B5F7471C63C17000FDB855 /* DataTableViewController.swift */,
+				98DE32CB1C5C0ACD00C185E0 /* CircleViewController.swift */,
+				988CBCAD1C65989B00F93BC7 /* TabBarController.swift */,
+				98F8ECF81C66F13B002D9DE3 /* Theme.swift */,
 				98DE329F1C5C009300C185E0 /* AppDelegate.swift */,
 				98DE32A81C5C009300C185E0 /* Assets.xcassets */,
 				98B5F7461C63BCF600FDB855 /* CGExamples */,
 				98B6094D1C5F0941000ACAE3 /* CircleView.swift */,
-				98DE32CB1C5C0ACD00C185E0 /* CircleViewController.swift */,
 				985666091C5EC7E000DCC79B /* Helper.swift */,
 				988CBCA71C65515500F93BC7 /* GitHubNetworkingManager.swift */,
 				98DE32AD1C5C009300C185E0 /* Info.plist */,
@@ -129,7 +133,6 @@
 				98DE32CD1C5C0F7D00C185E0 /* IssueTableViewCell.swift */,
 				98DE32AA1C5C009300C185E0 /* LaunchScreen.storyboard */,
 				98DE32A51C5C009300C185E0 /* Main.storyboard */,
-				988CBCAD1C65989B00F93BC7 /* TabBarController.swift */,
 			);
 			path = "GitHub Issues";
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				98DE32D01C5C247D00C185E0 /* Issue.swift in Sources */,
 				98B609561C5F0FED000ACAE3 /* CounterView.swift in Sources */,
 				98B5F7481C63C17000FDB855 /* DataTableViewController.swift in Sources */,
+				98F8ECF91C66F13B002D9DE3 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

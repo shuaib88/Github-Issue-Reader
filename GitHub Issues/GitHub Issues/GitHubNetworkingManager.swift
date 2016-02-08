@@ -33,6 +33,7 @@ class GitHubNetworkingManager {
             
             // Check for errors that occurred during the download.  If found, execute
             // the completion block with `nil`
+
             guard error == nil else {
                 print("error: \(error!.localizedDescription): \(error!.userInfo)")
                 completion(nil)

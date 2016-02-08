@@ -57,7 +57,13 @@
                             <outlet property="delegate" destination="Lf6-0M-PO6" id="8nh-dO-l8E"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Open Issues" id="Uka-9i-3Zm"/>
+                    <navigationItem key="navigationItem" title="Open Issues" id="Uka-9i-3Zm">
+                        <barButtonItem key="leftBarButtonItem" title="NightMode" id="Frf-SU-yn7">
+                            <connections>
+                                <action selector="nightMode:" destination="Lf6-0M-PO6" id="S9a-It-lFR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Evg-62-jwq">
                         <autoresizingMask key="autoresizingMask"/>
@@ -65,7 +71,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PwR-Yh-NXj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1413.5" y="-993.5"/>
+            <point key="canvasLocation" x="1353.5" y="-965.5"/>
         </scene>
         <!--Issue Detail-->
         <scene sceneID="RbM-dO-MaB">
@@ -190,7 +196,13 @@
                             <outlet property="delegate" destination="a9u-FJ-gw0" id="geT-UL-5Zx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Issues" id="7mJ-Np-nCg"/>
+                    <navigationItem key="navigationItem" title="All Issues" id="7mJ-Np-nCg">
+                        <barButtonItem key="leftBarButtonItem" title="NightMode" id="Ov8-Ek-Vzc">
+                            <connections>
+                                <action selector="nightMode:" destination="a9u-FJ-gw0" id="tZF-NB-COB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="0t3-T8-7Nd">
                         <autoresizingMask key="autoresizingMask"/>
@@ -198,7 +210,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3VQ-oG-554" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1413.5" y="-226.5"/>
+            <point key="canvasLocation" x="1362.5" y="-202.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">

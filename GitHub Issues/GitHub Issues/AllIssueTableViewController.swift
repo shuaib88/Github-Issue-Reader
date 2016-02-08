@@ -29,6 +29,15 @@ class AllIssueTableViewController: DataTableViewController {
         
         //dequeue reusable cell with the IssueTableView Cell we defined
         let cell = tableView.dequeueReusableCellWithIdentifier( cellIdentifier, forIndexPath: indexPath) as! AllIssueTableViewCell
+        
+        // set background color for cell
+        if defaults.boolForKey("nightModeOn") == true {
+            cell.backgroundColor = UIColor.blackColor()
+            cell.issueNameLabel.textColor = UIColor.whiteColor()
+        } else {
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.issueNameLabel.textColor = UIColor.blackColor()
+        }
 
         // fetch appropriate issue
         let issue = issues![indexPath.row]

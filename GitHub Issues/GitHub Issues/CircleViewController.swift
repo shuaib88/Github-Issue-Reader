@@ -20,6 +20,9 @@ class CircleViewController: UIViewController {
     
     var issues:[[String: AnyObject]]?
     
+    /// - Attributions: https://www.hackingwithswift.com/read/12/2/reading-and-writing-basics-nsuserdefaults
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     @IBOutlet weak var openIssueLabel: UILabel!
     @IBOutlet weak var closedIssueLabel: UILabel!
     
@@ -30,6 +33,25 @@ class CircleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// ensures correct colors are enforced
+        func setCorrectColors() -> Void {
+            // ensure consistent color for night mode
+            if defaults.boolForKey("nightModeOn") == false {
+                
+                //set colors
+                self.navigationController?.navigationBar.barTintColor = UIColor.grayColor()
+                self.tabBarController?.tabBar.barTintColor = UIColor.grayColor()
+                
+            } else {
+                defaults.setBool(true, forKey: "nightModeOn")
+                
+                //set colors
+                self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+                self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
+            }
+        }
+
         
         // Make a request for all open data from GitHub
         GitHubNetworkingManager.sharedInstance.issuesRequestion("https://api.github.com/repos/uchicago-mobi/2016-Winter-Forum/issues?state=all") { (response) -> Void in

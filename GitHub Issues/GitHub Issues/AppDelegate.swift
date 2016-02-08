@@ -41,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.blackColor()], forState: .Normal)
         
         //unselected icon color -- see TabController class
-        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         return true
