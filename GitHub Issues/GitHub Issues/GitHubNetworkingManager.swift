@@ -17,7 +17,6 @@ class GitHubNetworkingManager {
     // Query the API and return an array of `Strings`.  This is just an example
     
     func issuesRequestion(urlString: String, completion:([[String: AnyObject]]?) -> Void) {
-//    static func issuesRequestion(urlString: String, completion:([[String: AnyObject]]?) -> Void) {
         
         // Test that we can convert the `String` into an `NSURL` object.  If we can
         // not, then crash the application.

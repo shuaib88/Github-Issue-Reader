@@ -99,8 +99,8 @@ class DataTableViewController: UITableViewController {
         activityIndicator.startAnimating()
         
         // set the defaults
-        if let _ = defaults.objectForKey("firstLaunch"){
-            print("Not First Launch: ✌️")
+        if let date = defaults.objectForKey("firstLaunch"){
+            print("Not First Launch: ✌️, First Launch: \(date) ")
         } else {
             defaults.setObject(NSDate(), forKey: "firstLaunch")
             print("First Launch:🖕")

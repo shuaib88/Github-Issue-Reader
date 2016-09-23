@@ -54,7 +54,7 @@ class IssueDetailViewController: UIViewController {
     
     /// - Attributions: http://code.tutsplus.com/tutorials/ios-9-getting-started-with-sfsafariviewcontroller--cms-24260
     @IBAction func seeIssueOnWeb(sender: UIBarButtonItem) {
-        // uncomment to see in safari
+//        // uncomment to see in safari
 //        if let url = NSURL(string: issue!.url) {
 //            UIApplication.sharedApplication().openURL(url)
 //        }

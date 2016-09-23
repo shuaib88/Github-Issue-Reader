@@ -31,29 +31,13 @@ class CircleViewController: UIViewController {
     
     
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print(defaults.boolForKey("nightModeOn"))
-        
-        /// ensures correct colors are enforced
-        func setCorrectColors() -> Void {
-            // ensure consistent color for night mode
-            if defaults.boolForKey("nightModeOn") == false {
-                
-                //set colors
-                self.navigationController?.navigationBar.barTintColor = UIColor.grayColor()
-                self.tabBarController?.tabBar.barTintColor = UIColor.grayColor()
-                
-            } else {
-                defaults.setBool(true, forKey: "nightModeOn")
-                
-                //set colors
-                self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
-                self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
-            }
-        }
-
         
         // Make a request for all open data from GitHub
         GitHubNetworkingManager.sharedInstance.issuesRequestion("https://api.github.com/repos/uchicago-mobi/2016-Winter-Forum/issues?state=all") { (response) -> Void in
@@ -119,6 +103,11 @@ class CircleViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        // enforces nightMode colors
+        self.setCorrectColors()
+    }
+    
     /// MARK: Circle Helpers
     
     /// draws a circle and takes a point value width as well as color
@@ -144,5 +133,23 @@ class CircleViewController: UIViewController {
         
         //add to subView
         view.addSubview(circleView)
+    }
+    
+    /// ensures correct colors are enforced
+    func setCorrectColors() -> Void {
+        // ensure consistent color for night mode
+        if defaults.boolForKey("nightModeOn") == false {
+            
+            //set colors
+            self.navigationController?.navigationBar.barTintColor = UIColor.grayColor()
+            self.tabBarController?.tabBar.barTintColor = UIColor.grayColor()
+            
+        } else {
+            defaults.setBool(true, forKey: "nightModeOn")
+            
+            //set colors
+            self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+            self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
+        }
     }
 }

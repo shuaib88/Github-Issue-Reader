@@ -20,7 +20,6 @@ class CircleView: UIView {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clearColor()
         self.color = color
-
     }
     
     required init(coder aDecoder: NSCoder) {
